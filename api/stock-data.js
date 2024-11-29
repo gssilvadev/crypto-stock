@@ -12,8 +12,20 @@ export default async function handler(req, res) {
     try {
         // Loop para obter o preço de fechamento de cada ação
         for (let stock of stocks) {
-            const ticker = await yahooFinance.quote(stock);
-            data[stock] = ticker.regularMarketPrice;
+            try {
+                const ticker = await yahooFinance.quote(stock);
+
+                // Verifica se a informação de preço de mercado existe
+                if (ticker.regularMarketPrice !== undefined) {
+                    data[stock] = ticker.regularMarketPrice;
+                } else {
+                    console.warn(`Dados de preço não encontrados para ${stock}`);
+                    data[stock] = null; // Adiciona valor null se não houver preço
+                }
+            } catch (error) {
+                console.error(`Erro ao obter dados para ${stock}:`, error);
+                data[stock] = null; // Marca como null se falhar ao obter dados
+            }
         }
 
         // Garantir que o cabeçalho Content-Type seja JSON
