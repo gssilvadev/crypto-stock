@@ -16,10 +16,17 @@ export default async function handler(req, res) {
             data[stock] = ticker.regularMarketPrice;
         }
 
+        // Garantir que o cabeçalho Content-Type seja JSON
+        res.setHeader('Content-Type', 'application/json');
+        
         // Envia os dados como resposta JSON
         res.status(200).json(data);
     } catch (error) {
         console.error('Erro ao obter os dados das ações:', error);
+        
+        // Garantir que o cabeçalho Content-Type seja JSON
+        res.setHeader('Content-Type', 'application/json');
+        
         res.status(500).json({ error: "Erro ao obter os dados das ações." });
     }
 }
