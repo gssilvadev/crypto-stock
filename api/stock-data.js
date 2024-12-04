@@ -4,7 +4,7 @@ let lastStockData = {}; // Para armazenar os preços anteriores
 
 export default async function handler(req, res) {
     const stocks = [
-        'BBDC4.SA', 'BBAS3.SA', 'MGLU3.SA', 'VIIA3.SA', 'B3SA3.SA',
+        'BBDC4.SA', 'BBAS3.SA', 'MGLU3.SA', 'B3SA3.SA',
         'BTC-USD', 'ETH-USD', 'VALE3.SA', 'PETR4.SA', 'ITUB4.SA', 'NDX', '^GSPC'
     ];
 
